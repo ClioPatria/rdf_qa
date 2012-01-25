@@ -18,13 +18,16 @@
 		       foaf:name "Jacco van Ossenbruggen" ;
 		       foaf:mbox <literal(Jacco.van.Ossenbruggen@cs.vu.nl)> ;
 		     ] ;
+	cpack:author <http://cliopatria.swi-prolog.org/user/jan>;
 	cpack:primaryRepository
 	    [ a cpack:GitRepository ;
 	      cpack:gitURL <ecgit:lib/git/rdf_qa.git>
 	    ] ;
 	cpack:description
 
-"""Package description goes here.  You can use PlDoc markup.
+"""
+Package with an extensible set of heuristics for detecting problems in RDF data.
+Defines a Web interface on http://servername/qa_index.
 """ .
 
 
