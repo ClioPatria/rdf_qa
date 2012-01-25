@@ -62,7 +62,7 @@ qa_index([Class|T]) -->
 			], Location)
 	},
 	html_requires(qa),
-	html(div(class(qa_class_title), a(href(Location), [\qa:class_label(Class), \count(100, C)]))),
+	html(div(class(qa_class_title), a(href(Location), [\(qa:class_label(Class)), \count(100, C)]))),
 	qa_index(T).
 qa_index([_|T]) -->
 	qa_index(T).
@@ -83,7 +83,7 @@ qa_report(Classes, Options) -->
 report_by_class([], _) -->
         [].
 report_by_class([Class-Grouped|T], Options) -->
-        html([ h3(class(qa_class_heading),a(name(Class), \qa:class_label(Class))),
+        html([ h3(class(qa_class_heading),a(name(Class), \(qa:class_label(Class)))),
                ul(\show_groups(Grouped, [class(Class)|Options]))
              ]),
         report_by_class(T, Options).
@@ -101,11 +101,11 @@ show_namespace(NS, Options) -->
         { atom_concat('__file://', Path, NS), !,
           option(class(Class), Options)
         },
-        html([\qa:class_label(Class), ' for blank nodes from ', tt(Path)]).
+        html([\(qa:class_label(Class)), ' for blank nodes from ', tt(Path)]).
 show_namespace(NS, Options) -->
         { option(class(Class), Options)
         },
-        html([\qa:class_label(Class), ' for namespace ', tt(NS)]).
+        html([\(qa:class_label(Class)), ' for namespace ', tt(NS)]).
 
 show_uris(URIs, Options) -->
         { option(max_per_ns(Max), Options, 20),
