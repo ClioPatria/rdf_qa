@@ -16,6 +16,7 @@
 
 :- use_module(library(count)).
 :- use_module(components(label)).
+:- use_module(components(qa_heuristics)).
 :- use_module(components(qa_default_heuristics)).
 
 :- http_handler(cliopatria('qa_index'), rdf_qa_index, [content_type(text/html)]).
