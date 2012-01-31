@@ -25,8 +25,11 @@
 rdf_qa_index(_Request) :-
 	findall(Class, clause(qa:rdf_warning(Class, _), _), Classes),
 	reply_html_page(cliopatria(main),
-			title('Generate RDF quality reports'),
-			body(\qa_index(Classes))
+			title('RDF quality reports'),
+			body([
+			    h3('Running RDF quality heuristics'),
+			    \qa_index(Classes)
+			     ])
 		       ).
 
 %%	rdf_qa(Request)
