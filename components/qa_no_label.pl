@@ -14,3 +14,6 @@ qa:rdf_warning(no_label, URI) :-
 
 qa:class_label(no_label) -->
         html(['URIs without label']).
+
+qa:rdf_qa_ok(no_label, URI) :-
+	sub_atom(URI, 0, _, _, 'http://www.w3.org/2001/XMLSchema#').
