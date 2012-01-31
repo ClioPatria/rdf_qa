@@ -1,14 +1,12 @@
-:- module(qa_heuristics, [
-			  qa:rdf_warning/2,  % +Class, -URI
-			  qa:class_label//1  % +Class
-			 ]).
+:- module(qa, []).
+
 
 :- multifile
-	qa:rdf_warning/2,
-	qa:rdf_qa_ok/2,
-	qa:class_label//1.
+	rdf_warning/2,
+	rdf_qa_ok/2,
+	class_label//1.
 
 
 :- rdf_meta
-	qa:rdf_warning(o,r).
+	rdf_warning(o,r).
 
