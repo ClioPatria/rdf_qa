@@ -1,3 +1,3 @@
-:- module(defaults, []).
+:- module(qa_defaults, []).
 
-:- use_module(cycle_prop).
+:- use_module(qa_cycle_prop).
