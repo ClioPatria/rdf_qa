@@ -1,6 +1,6 @@
 :- module(qa_heuristics, [
 			  qa:rdf_warning/2,  % +Class, -URI
-			  qa:class_label//1 % +Class
+			  qa:class_label//1  % +Class
 			 ]).
 
 :- multifile
