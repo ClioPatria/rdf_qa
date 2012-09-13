@@ -1,4 +1,8 @@
-:- module(qa, []).
+:- module(qa,
+	  [ rdf_warning/2,		% ?ErrorClass, ?URI
+	    rdf_qa_ok/2,		% ?ErrorClass, ?URI
+	    class_label//1		% +ErrorClass
+	  ]).
 
 /** <module> RDF QA hooks
 

@@ -23,7 +23,7 @@
 :- http_handler(cliopatria('qa'),	rdf_qa,	   [content_type(text/html)]).
 
 rdf_qa_index(_Request) :-
-	findall(Class, clause(qa:rdf_warning(Class, _), _), Classes),
+	findall(Class, clause(rdf_warning(Class, _), _), Classes),
 	reply_html_page(cliopatria(main),
 			title('RDF quality reports'),
 			body([
@@ -49,7 +49,7 @@ rdf_qa(Request) :-
 	;   Max = Max0
 	),
 	include(ground, [ns(NS), max_per_ns(Max), show(Show)], Options),
-	findall(Class, clause(qa:rdf_warning(Class, _), _), Classes),
+	findall(Class, clause(rdf_warning(Class, _), _), Classes),
 	warnings_by_class(Classes, ByCLass, Options),
 	reply_html_page(cliopatria(main),
 			title('RDF Quality report'),
@@ -58,14 +58,14 @@ rdf_qa(Request) :-
 
 qa_index([]) --> [].
 qa_index([Class|T]) -->
-	{ answer_count(URI,qa:rdf_warning(Class, URI), 100, C),
+	{ answer_count(URI,rdf_warning(Class, URI), 100, C),
 	  C > 0, !,
 	  http_location([ path(qa),
 			  search([ class=Class ])
 			], Location)
 	},
 	html_requires(qa),
-	html(div(class(qa_class_title), a(href(Location), [\(qa:class_label(Class)), \count(100, C)]))),
+	html(div(class(qa_class_title), a(href(Location), [\class_label(Class), \count(100, C)]))),
 	qa_index(T).
 qa_index([_|T]) -->
 	qa_index(T).
@@ -86,7 +86,7 @@ qa_report(Classes, Options) -->
 report_by_class([], _) -->
         [].
 report_by_class([Class-Grouped|T], Options) -->
-        html([ h3(class(qa_class_heading),a(name(Class), \(qa:class_label(Class)))),
+        html([ h3(class(qa_class_heading),a(name(Class), \class_label(Class))),
                ul(\show_groups(Grouped, [class(Class)|Options]))
              ]),
         report_by_class(T, Options).
@@ -104,11 +104,11 @@ show_namespace(NS, Options) -->
         { atom_concat('__file://', Path, NS), !,
           option(class(Class), Options)
         },
-        html([\(qa:class_label(Class)), ' for blank nodes from ', tt(Path)]).
+        html([\class_label(Class), ' for blank nodes from ', tt(Path)]).
 show_namespace(NS, Options) -->
         { option(class(Class), Options)
         },
-        html([\(qa:class_label(Class)), ' for namespace ', tt(NS)]).
+        html([\class_label(Class), ' for namespace ', tt(NS)]).
 
 show_uris(URIs, Options) -->
         { option(max_per_ns(Max), Options, 20),
@@ -197,7 +197,7 @@ warnings_for_class(Class, Grouped, Options) :-
 
 
 warning_by_ns(Warning, NS, URI) :-
-	qa:rdf_warning(Warning, URI),
+	rdf_warning(Warning, URI),
 	namespace(URI, NS).
 
 namespace(rdf(URI, _, _), NS) :- !,
