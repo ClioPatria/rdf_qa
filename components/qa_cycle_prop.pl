@@ -1,4 +1,4 @@
-:- module(cycle_prop, []).
+:- module(qa_cycle_prop, []).
 
 :- use_module(qa_heuristics).
 :- use_module(library(semweb/rdf_db)).
