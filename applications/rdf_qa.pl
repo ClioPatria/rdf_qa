@@ -4,7 +4,6 @@
 
 
 :- use_module(library(semweb/rdf_db)).
-:- use_module(library(semweb/rdfs)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_parameters)).
 :- use_module(library(http/html_write)).
@@ -12,7 +11,6 @@
 :- use_module(library(url)).
 :- use_module(library(apply)).
 :- use_module(library(option)).
-:- use_module(library(settings)).
 
 :- use_module(library(count)).
 :- use_module(components(label)).
