@@ -7,7 +7,10 @@
 
 qa:rdf_warning(object_only, rdf(S,P,O)) :-
         rdf(S, P, O),
+	\+ rdf_equal(rdfs:isDefinedBy, P),
+	\+ rdf_equal(rdfs:seeAlso, P),
 	\+ O = literal(_),
-        \+ rdf_subject(O).
+        \+ rdf_subject(O),
+	\+ qa:rdf_qa_ok(object_only, O).
 qa:class_label(object_only) -->
         html(['Triples with ', i('Object that is never a Subject')]).
