@@ -1,5 +1,6 @@
 :- module(qa_domain_whitelist, []).
 
+:- use_module(library(semweb/rdf_db)).
 :- use_module(qa_heuristics).
 
 %%	rdf_qa_ok(?ErrorClass, ?URI) is nondet.
