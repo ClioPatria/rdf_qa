@@ -16,6 +16,7 @@ defined predicates that may have no default definition.
 	rdf_qa_ok/2,
 	class_label//1.
 
+:- use_module(library(semweb/rdf_db)). % for rdf_meta
 
 :- rdf_meta
 	rdf_warning(o,r).
