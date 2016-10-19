@@ -36,17 +36,15 @@ rdf_qa_index(_Request) :-
 
 rdf_qa(Request) :-
 	http_parameters(Request,
-			[ max_per_ns(Max0, [integer, default(20)]),
+			[ max_per_ns(MaxPerNS, [integer, default(5)]),
+			  max_ns(MaxNS, [integer, default(50)]),
 			  class(Class, [optional(true)]),
 			  ns(NS, [optional(true)]),
 			  show(Show, [oneof([local_view,uri]),
 				      default(local_view)])
 			]),
-	(   nonvar(NS)
-	->  Max = inf
-	;   Max = Max0
-	),
-	include(ground, [ns(NS), max_per_ns(Max), show(Show)], Options),
+
+        include(ground, [ns(NS), max_per_ns(MaxPerNS), max_ns(MaxNS), show(Show)], Options),
 	findall(Class, clause(rdf_warning(Class, _), _), Classes),
 	warnings_by_class(Classes, ByCLass, Options),
 	reply_html_page(cliopatria(main),
@@ -85,7 +83,7 @@ report_by_class([], _) -->
         [].
 report_by_class([Class-Grouped|T], Options) -->
         html([ h3(class(qa_class_heading),a(name(Class), \class_label(Class))),
-               ul(\show_groups(Grouped, [class(Class)|Options]))
+               ol(\show_groups(Grouped, [class(Class)|Options]))
              ]),
         report_by_class(T, Options).
 
@@ -187,10 +185,11 @@ warnings_by_class([_|T0], T, Options) :-
 	warnings_by_class(T0, T, Options).
 
 warnings_for_class(Class, Grouped, Options) :-
-	option(max_per_ns(Max), Options, 20),
+	option(max_per_ns(MaxPerNS), Options, 20),
+	option(max_ns(MaxNS), Options, 10),
 	option(ns(NS), Options, _),
 	answer_pair_set(NS-URI, warning_by_ns(Class, NS, URI),
-			  inf, Max, Grouped).
+			  MaxNS, MaxPerNS, Grouped).
 
 
 
