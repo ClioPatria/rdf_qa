@@ -10,6 +10,8 @@ qa:rdf_warning(no_label, URI) :-
 	rdf_subject(URI),
 	\+ rdf_is_bnode(URI),
 	\+ rdf_label(URI, _),
+	\+ rdf_has(URI, 'http://www.w3.org/2008/05/skos-xl#literalForm', _),
+	\+ rdf_has(URI, rdf:value, _),
 	\+ qa:rdf_qa_ok(no_label, URI).
 
 qa:class_label(no_label) -->
